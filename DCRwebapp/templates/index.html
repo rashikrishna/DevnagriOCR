@@ -5,14 +5,18 @@
     </title>
   </head>
   <body>
+      <h1><center> Devnagri OCR </center></h1>
+      <br/><br/><br/>
+      Select an image to read
       <input id="image-selector" type="file" name="data" placeholder="Enter data">
       <button id="predict-button">Predict</button>
-      <p style="font-weight : bold">Predictions</p>
       <img id="selected-image" src=""/>
+      <p style="font-weight : bold">Predictions</p>
       <br/><br/>
         Predicted :
       <span id="answer"></span>
       <span id="probability"></span>
+      <button id="show-segment">Show Segments</button>
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <script>
         let base64Image;
@@ -35,11 +39,16 @@
           }
           console.log(message);
           $.post("http://127.0.0.1:5000/predict",JSON.stringify(message),function(response){
-            document.getElementById("answer").innerHTML=response.predict.answer+" ("+response.predict.devanagri+" )";
+            document.getElementById("answer").innerHTML=response.predict.answer;
             document.getElementById("probability").innerHTML="Accuracy "+response.predict.probability+"%";
             console.log(anq);
           });
         });
+
+        $("#show-segment").click(function(event)){
+
+        }
+
       </script>
     </body>
   </html>
