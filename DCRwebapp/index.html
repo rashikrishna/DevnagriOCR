@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <title>
+      DCR
+    </title>
+  </head>
+  <body>
+    Welcome {{name}}
+    <form method='post' action="{{url_for('predict')}}">
+      <input type="text" name="data" placeholder="Enter data">
+      <input type="submit" value="Submit">
+    </form>
+    </body>
+  </html>
