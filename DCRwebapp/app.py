@@ -88,7 +88,7 @@ def preprocess(bgr_img):#gray image
     template = th_img[tb[0]+dummy:tb[1]-dummy, lr[0]+dummy:lr[1]-dummy]
     return (template, tb, lr)
 
-def segmentation(bordered, thresh=255, min_seg=10, scheck=0.25):
+def segmentation(bordered, thresh=255, min_seg=100, scheck=0.25):
     try:
         shape = bordered.shape
         check = int(scheck * shape[0])
@@ -155,11 +155,15 @@ get_model()
 def index():
     return render_template('index.html')
 
+
+
+
 @app.route("/predict",methods=['POST','GET'])
 def predict():
     if request.method=='POST':
         message=request.get_json(force=True)
         encoded=message['image']
+
         decoded=base64.b64decode(encoded)
         nparr=np.fromstring(decoded,np.uint8)
         img=cv2.imdecode(nparr,cv2.IMREAD_GRAYSCALE)
